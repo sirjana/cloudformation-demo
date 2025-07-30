@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: Simple VPC Creation Template
+Description: Simple VPC Creation Template with a Subnet
 
 Resources:
   MyVPC:
@@ -12,7 +12,22 @@ Resources:
         - Key: Name
           Value: MySimpleVPC
 
+  MySubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MyVPC
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: !Select [ 0, !GetAZs "" ]
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: MyPublicSubnet
+
 Outputs:
   VPCId:
     Description: ID of the created VPC
     Value: !Ref MyVPC
+
+  SubnetId:
+    Description: ID of the created subnet
+    Value: !Ref MySubnet
