@@ -21,7 +21,7 @@ Resources:
       MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
-          Value: MyPublicSubnet
+          Value: MyPublicSubnett
 
 Outputs:
   VPCId:
